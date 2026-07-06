@@ -15,7 +15,7 @@ Drop in a CSV glossary (term + link pairs) and an HTML page, and Glossary Linker
 - **Download** — outputs the linked HTML as a downloadable file.
 - **Light/dark theme toggle.**
 
-![Example of program interface](assets\feature-showcase\example1.png)
+![Example of program interface](assets/feature-showcase/example1.png)
 
 ## Requirements
 
