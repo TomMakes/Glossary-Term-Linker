@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Glossary Linker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <div id="root">
+    <div class="page">
+      <header class="header">
+        <div class="header-text">
+          <div class="title-row">
+            <div class="app-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 13a5 5 0 0 0 7.07 0l2.83-2.83a5 5 0 0 0-7.07-7.07l-1.5 1.5"></path>
+                <path d="M14 11a5 5 0 0 0-7.07 0L4.1 13.83a5 5 0 0 0 7.07 7.07l1.5-1.5"></path>
+              </svg>
+            </div>
+            <h1>Glossary Linker</h1>
+          </div>
+          <p class="description">
+            Drop in a glossary and an HTML page — every matching term gets hyperlinked automatically, skipping code, existing links, and attributes.
+          </p>
+        </div>
+        <button id="theme-toggle" class="theme-toggle" type="button" title="Toggle theme">
+          <span id="theme-toggle-content"></span>
+        </button>
+      </header>
+
+      <div class="card">
+        <div class="dropzone-grid">
+          <div class="dropzone-col">
+            <div id="csv-zone" class="dropzone">
+              <input id="csv-input" type="file" accept=".csv,text/csv" hidden />
+              <div class="badge badge-csv">CSV</div>
+              <div id="csv-body"></div>
+            </div>
+            <div id="csv-error" class="error-strip" hidden>
+              <span class="error-bang">!</span><span id="csv-error-text"></span>
+            </div>
+            <div class="format-hint">
+              <span class="mono">CSV format:</span>
+              <span>a header row with <b>term</b> and <b>link</b> columns, one term per line.</span>
+            </div>
+          </div>
+
+          <div class="dropzone-col">
+            <div id="html-zone" class="dropzone">
+              <input id="html-input" type="file" accept=".html,.htm,.txt,text/html,text/plain" hidden />
+              <div class="badge badge-html">HTML</div>
+              <div id="html-body"></div>
+            </div>
+            <div id="html-error" class="error-strip" hidden>
+              <span class="error-bang">!</span><span id="html-error-text"></span>
+            </div>
+            <button id="match-mode-toggle" class="mode-toggle" type="button" aria-label="Toggle term matching mode"
+            title="Choose whether to link every occurrence or only the first occurrence of each glossary term.">
+              <span id="match-mode-text">Hyperlink every matching term</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="start-row">
+          <button id="start-btn" class="btn-primary" type="button" disabled>Start linking</button>
+        </div>
+
+        <div id="download-row" class="download-row" hidden>
+          <button id="download-btn" class="btn-dark" type="button">
+            <svg width="17" height="17" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 2v9"></path>
+              <path d="M5 8l4 4 4-4"></path>
+              <path d="M3 15h12"></path>
+            </svg>
+            Download linked HTML
+          </button>
+        </div>
+      </div>
+
+      <div id="results-card" class="card results-card" hidden>
+        <div class="results-header">
+          <h2>Replacement summary</h2>
+          <div id="result-subtitle" class="muted small"></div>
+        </div>
+
+        <div class="stat-block">
+          <div id="total-count" class="stat-number">0</div>
+          <div id="total-label" class="stat-label"></div>
+        </div>
+
+        <div id="matched-section" class="results-section" hidden>
+          <div class="section-label">Terms linked</div>
+          <div id="matched-list" class="matched-list"></div>
+        </div>
+
+        <div id="nomatch-section" class="results-section" hidden>
+          <div class="section-label">No matches found</div>
+          <div id="nomatch-chips" class="chip-cloud"></div>
+        </div>
+
+        <div id="skipped-note" class="skipped-note" hidden>
+          <span class="dot"></span><span id="skipped-text"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
